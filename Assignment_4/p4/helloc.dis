@@ -1,0 +1,118 @@
+The read String being displayed as memory instructions as below. They are annotated with which instruction refers to which instruction in C.
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Machine Instructions $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+   0x00000000004006fe <+0>:     push   %rbp ----- store base pointer on the stack for return
+   0x00000000004006ff <+1>:     mov    %rsp,%rbp ---now point rbp to rsp
+   0x0000000000400702 <+4>:     push   %r13
+   0x0000000000400704 <+6>:     push   %r12
+   0x0000000000400706 <+8>:     push   %rbx
+   0x0000000000400707 <+9>:     sub    $0x18,%rsp
+   0x000000000040070b <+13>:    mov    %rdi,%r13
+   0x000000000040070e <+16>:    mov    %rdx,-0x28(%rbp)
+   0x0000000000400712 <+20>:    lea    0x24(%rsi),%eax
+   0x0000000000400715 <+23>:    cltq
+   0x0000000000400717 <+25>:    add    $0x1e,%rax
+   0x000000000040071b <+29>:    and    $0xfffffffffffffff0,%rax
+   0x000000000040071f <+33>:    sub    %rax,%rsp
+   0x0000000000400722 <+36>:    lea    0xf(%rsp),%r12
+   0x0000000000400727 <+41>:    and    $0xfffffffffffffff0,%r12
+   0x000000000040072b <+45>:    mov    $0x0,%ebx --- initialize i with 0
+   0x0000000000400730 <+50>:    mov    0x200669(%rip),%rdi        # 0x600da0 <stdin@@GLIBC_2.2.5>
+   0x0000000000400737 <+57>:    callq  0x4005e0 <fgetc@plt>   --------------------------- get character into C, from getc
+   0x000000000040073c <+62>:    cmp    $0xffffffffffffffff,%eax   -------- Compare C with EOF
+   0x000000000040073f <+65>:    je     0x400752 <readString+84> ----------if true break the loop
+   0x0000000000400741 <+67>:    cmp    $0xa,%eax --------------------------Compare C with carriage return
+   0x0000000000400744 <+70>:    je     0x400752 <readString+84> -----------if true break the loop
+   0x0000000000400746 <+72>:    movslq %ebx,%rdx
+   0x0000000000400749 <+75>:    mov    %al,(%r12,%rdx,1) Move read character C to buff
+   0x000000000040074d <+79>:    add    $0x1,%ebx -------------------------- perform +1 for for loop using registers,no memory assigned on stack for i;
+   0x0000000000400750 <+82>:    jmp    0x400730 <readString+50> ------------ continue for loop
+   0x0000000000400752 <+84>:    movslq %ebx,%rbx
+   0x0000000000400755 <+87>:    movb   $0x0,(%r12,%rbx,1) ---- Initialize i to 0 using regsiters,no memory assigned on stack for i;
+   0x000000000040075a <+92>:    mov    %r13,%rax  
+   0x000000000040075d <+95>:    lea    0x24(%r12),%rcx ---- get BUFFSIZE into rcx
+   0x0000000000400762 <+100>:   movzbl (%r12),%edx --- Start of for loop
+   0x0000000000400767 <+105>:   mov    %dl,(%rax)---- fetch S into rax
+   0x0000000000400769 <+107>:   add    $0x1,%r12 --- increment i by 1 using regsiters,using regsiters,no memory assigned on stack for i;
+   0x000000000040076d <+111>:   add    $0x1,%rax --- add 1 to rax(S) to move its address by 1
+   0x0000000000400771 <+115>:   cmp    %rcx,%r12 --compare i and BUFFSIZE
+   0x0000000000400774 <+118>:   jne    0x400762 <readString+100> --------------continue for loop, when not equal
+   0x0000000000400776 <+120>:   mov    %r13,%rdi
+   0x0000000000400779 <+123>:   mov    $0x0,%eax
+   0x000000000040077e <+128>:   callq  *-0x28(%rbp) -- call to CheckName
+   0x0000000000400781 <+131>:   lea    -0x18(%rbp),%rsp
+   0x0000000000400785 <+135>:   pop    %rbx
+   0x0000000000400786 <+136>:   pop    %r12
+   0x0000000000400788 <+138>:   pop    %r13
+   0x000000000040078a <+140>:   leaveq
+   0x000000000040078b <+141>:   retq
+
+###########################################DATA SECTION#################################
+
+#################################<-----Lower Address
+#				#<--f=0x400859 <checkName>
+#				#
+#	CODE/TEXT 		#<---- CODE SECTION
+#				#
+#################################
+#				#
+#				#<--- $1 = 0x600d84 "F"(GRADE IS STORED HERE)
+#	DATA			#<--- DATA SECTION
+#				#
+#################################
+#				#
+#				#<--- $2 = (char (*)[36]) 0x600dc0(NAME IS STORED HERE)
+#				#
+#	BSS SECTION		#<---- BSS SECTION
+#				#
+#################################
+#				#
+#				#
+#				#
+#	HEAP			#<--- HEAP SECTION
+#				#
+#				#
+#################################
+#	    |			#
+#	    |(Heap grows down)	#
+#	    V			#
+#				#
+#				#
+#	    ^	 		#
+#	    |(Stack grows up)	#
+#	    |			#
+#################################
+#				#
+#				#
+#				#<--- STACK SECTION
+#				#<--(char (*)[variable]) 0x7fffffffdf30 (Address of buf[0])
+#	STACK SECTION		#
+# 				#<--(char (*)[variable]) 0x7fffffffdf54 (Address of buf[35])
+#				#
+#				#<-- no location for c,i and r as they are optimized out)
+#				#<-- Address of function pointer to f() -- stored at 0x7fffffffdf78
+#				#
+#################################<--rbp at 0x7fffffffdfa0(points to Stack base)
+#				#
+#				#
+#################################<--- HIGHER ADDRESS
+
+
+STACK FRAME BELOW : Registers are effectively used and not all writes got to the stack memory.
+No memory is allocated for i,as it is optimized out. No memory is allocated for r,as it is optimized out.
+No memory is allocated for c,as it is optimized out.
+
+Stack level 0, frame at 0x7fffffffdfb0:
+rip = 0x400762 in readString (hello.c:54); saved rip 0x400803
+called by frame at 0x7fffffffdfd0
+source language c.
+Arglist at 0x7fffffffdfa0, args: s=0x600dc0 "", r=<value optimized out>, f=0x400859 <checkName>
+Locals at 0x7fffffffdfa0, Previous frame's sp is 0x7fffffffdfb0
+Saved registers:
+rbx at 0x7fffffffdf88, rbp at 0x7fffffffdfa0, r12 at 0x7fffffffdf90, r13 at 0x7fffffffdf98, rip at 0x7fffffffdfa8
+
+
+
+
+########################################################################################

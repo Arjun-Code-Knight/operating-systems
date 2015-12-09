@@ -1,0 +1,19 @@
+Stack frame at 0x7fffffffdf50:
+ rip = 0x4008bc in main (hello.c:77); saved rip = 0x2aaaaacf1ec5
+ caller of frame at 0x7fffffffdf30
+ source language c.
+ Arglist at 0x7fffffffdf28, args: argc=1, argv=0x7fffffffe028
+ Locals at 0x7fffffffdf28, Previous frame's sp is 0x7fffffffdf50
+ Saved registers:
+  rbx at 0x7fffffffdf30, rbp at 0x7fffffffdf38, r12 at 0x7fffffffdf40, rip at 0x7fffffffdf48
+
+
+Stack level 0, frame at 0x7fffffffdf20:
+ rip = 0x40086a in readString (hello.c:35); saved rip = 0x4009ed
+ called by frame at 0x7fffffffdf50
+ source language c.
+ Arglist at 0x7fffffffdf10, args: s=0x6010c0 <Name> "", r=0, f=0x4007fd <checkName>
+ Locals at 0x7fffffffdf10, Previous frame's sp is 0x7fffffffdf20
+ Saved registers:
+  rbx at 0x7fffffffdf00, rbp at 0x7fffffffdf10, r12 at 0x7fffffffdf08, rip at 0x7fffffffdf18
+
