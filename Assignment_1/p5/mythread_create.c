@@ -1,3 +1,8 @@
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
+ */
+ 
 #define _GNU_SOURCE 
 #include <malloc.h>
 #include <string.h>

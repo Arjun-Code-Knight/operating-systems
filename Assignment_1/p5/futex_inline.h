@@ -1,3 +1,8 @@
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
+ */
+ 
 #include "myatomic.h"
 
 /* Atomic dec: return new value. */

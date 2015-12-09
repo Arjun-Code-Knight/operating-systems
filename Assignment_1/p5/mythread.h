@@ -1,11 +1,8 @@
-/*/* Single Author info:
- *      athimma Arjun Thimmareddy
- * Group info:
- *      athimma Arjun Thimmareddy
- *      akarat Arjun Karat
- *      ckapadi Chirag Kapadia
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
  */
-
+ 
 /*
  * mythread.h -- interface of user threads library
  */

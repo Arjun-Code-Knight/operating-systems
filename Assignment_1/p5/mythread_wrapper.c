@@ -1,3 +1,8 @@
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
+ */
+ 
 #include <unistd.h>
 #include <mythread.h>
 #include <futex.h>

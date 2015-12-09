@@ -1,3 +1,8 @@
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
+ */
+ 
 #include <mythread.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,3 +1,8 @@
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
+ */
+ 
 #include <string.h>
 #include <mythread.h>
 #include <mythread_queue.h>

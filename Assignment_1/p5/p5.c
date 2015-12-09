@@ -1,3 +1,8 @@
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
+ */
+ 
 #define NTHREADS 10                                                         
 #include <mythread.h>                                                            
 #include <stdio.h>
