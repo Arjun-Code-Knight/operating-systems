@@ -1,0 +1,57 @@
+****************************************
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
+ */
+****************************************
+
+Implement feedback prioritized preemptive scheduling with time slice of 2^(i-1)ms for the i-th invocation in wall-clock time (SIGALRM) for the provided user-level threads package.
+
+void signal_handler(int signal)
+void mythread_init_sched()
+void mythread_leave_kernel()
+int mythread_attr_destroy(mythread_attr_t *attribute)
+int mythread_attr_init(mythread_attr_t *attribute)
+void mythread_exit_sched()
+void internal_scheduler()
+
+*********************************************
+
+Building the file using make file
+
+compiling,cleaning and creation of libraries can be done by running the statement 'make'  in the terminal.
+once it is compiled succesfully, make file will create executable file 'mytest' for testing.
+For testing we need to run the command ./mytest which will run the test program mytest.c and show the output in the console
+
+*********************************************
+
+Testing the scheduler
+
+It is done by running the program mytest.c.
+It has already predefined the number of threads which is going to get created in the test program.  It will run and test all the functionalities implemented in the scheduler.
+
+*********************************************
+ 
+void signal_handler(int signal)
+	Signal handler which is used to handle SIGALRM and SIGUSR1.
+
+void mythread_init_sched()
+	Called once by each Thread - init_sched, it will initialize all the attributes required for time slicing
+
+void mythread_leave_kernel()
+	Leave kernel and call runq to release all threads which needs to be re-scheduled
+
+int mythread_attr_destroy(mythread_attr_t *attribute)
+	Destroy the attributes of the thread
+
+int mythread_attr_init(mythread_attr_t *attribute)
+	Initialize the attributes of the thread
+
+void mythread_exit_sched()
+	Will exit the scheduler when it is called
+
+void internal_scheduler()
+	Called when the thread exits the handler, since we need to check which thread needs to be re-scheduled for every time splice.
+This is called for every SIGALRM received.
+
+*************************************************

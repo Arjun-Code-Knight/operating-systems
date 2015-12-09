@@ -1,0 +1,43 @@
+/* 	Author info
+ *	athimma Arjun Thimmareddy
+ * 
+ */
+ 
+/*
+ * myqueue.h -- interface for queue ops
+ */
+
+#ifndef MYQUEUE_H
+#define MYQUEUE_H
+
+#include <malloc.h>
+#include <stdio.h>
+
+typedef struct mythread_queue {
+  void *item;
+  struct mythread_queue *prev, *next;
+} *mythread_queue_t;
+
+/* Initialize the queue */
+void mythread_q_init(mythread_queue_t *headp, void *item);
+
+/* Test if item in Q, return TRUE if so, FALSE o/w */
+int mythread_inq(mythread_queue_t *headp, void *item);
+
+/* return length if Q */
+int mythread_lenq(mythread_queue_t *headp);
+
+/* Enqueue the new item at the tail of any items at the same priority level */
+void mythread_enq_tail(mythread_queue_t *headp, void *item);
+
+/* Enqueue the new item at the head of any items at the same priority level */
+void mythread_enq_head(mythread_queue_t *headp, void *item);
+
+/* Remove elements from the queue */
+void mythread_deq(mythread_queue_t *headp, void *item);
+/*Keep it for testing*/
+
+/* Remove elements from the queue with priority*/
+void *mythread_deq_prio(mythread_queue_t *headp);
+
+#endif /* MYQUEUE_H */
