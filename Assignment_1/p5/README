@@ -1,0 +1,101 @@
+Idea is to implement a Non pre-emptive user level thread library mythread.h with the following methods
+
+mythread_self
+mythread_create
+mythread_yield
+mythread_join
+mythread_exit
+mythread_attr_init
+mythread_attr_destroy
+mythread_attr_setstack
+mythread_attr_getstack
+mythread_attr_setstacksize
+mythread_attr_getstacksize
+
+*********************************************
+
+Building the file using make file
+
+compiling,cleaning and creation of libraries can be done by running the statement 'make' or 'make a5' in the terminal.
+once it is compiled succesfully, make file will create executable file p5 for testing.
+For testing we need to run the command ./p5 which will run the test program p5.c and show the output in the console
+
+*********************************************
+
+Testing mythread.h library
+
+It is done by running the program p5.c.
+It has already predefined the number of threads which is going to get created in the test program.  It will run and test all the functionalities implemented in mythread.h library.
+
+*********************************************
+ mythread_self 
+  Returns the thread TCB of running thread.
+
+ mythread_create 
+  prepares context of new_thread as start_func(arg),
+  Threads are activated (run) according to the number of available LWPs
+  or are marked as ready.
+
+mythread_yield 
+  suspend the current thread and dispatch the nest ready thread from the queue
+
+ mythread_join 
+  suspend calling thread if target_thread has not finished,
+  enqueue on the join Q of the target thread, then dispatch ready thread;
+  once target_thread finishes, it activates the calling thread.
+
+mythread_exit 
+  exit thread, awakes joiners on return
+  from thread_func(function which gets called from mythread_create) and dequeue itself from run Q before dispatching run->next
+
+mythread_attr_init
+  It will take care of the initialization of stack address with default address and also takes care of setting a boundary. (16 MB is the default stack size)
+
+mythread_attr_destroy
+  It takes care of freeing the already alloted memory for the stack
+
+mythread_attr_setstack
+  It will take care of setting the stack address as well as stack base if it is passed
+
+mythread_attr_getstack
+  It will return the stack adddress and base
+
+mythread_attr_setstacksize
+  It will just set the stack size nothing else
+
+mythread_attr_getstacksize
+  It will return the stack size.
+
+*************************************************
+
+Data Structures Used.
+
+We have used a global queue which is a doubly linked list to store the child threads which is getting created from the main thread,
+it also saves the main thread and idle thread.
+
+We also used a doubly linked list queue to store the list of threads waiting for a particular thread to finish, this queue will be part
+of a corresponding TCB (Thread control block)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
